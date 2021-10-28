@@ -1,0 +1,9 @@
+Microservices
+	Book	=>	5001
+	Report	=>	5002
+
+Presentation
+	Web		=>	5010
+
+Gateways
+	BffWeb	=>	5000

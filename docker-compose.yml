@@ -1,0 +1,8 @@
+version: "3.8"
+services:
+  bookdb:
+    image: postgres
+  rabbitmq:
+    image: rabbitmq:3.9.8-management
+volumes:
+  bookdb_volume:

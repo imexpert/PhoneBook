@@ -1,7 +1,8 @@
-# PhoneBook
-Phone Book Application using Microservices
+<h1>Phone Book Application using Microservices</h1>
 
-Projelerin çalıştığı portlar Ports.txt dosyasının içerisinde kayıt altında tutuluyor.
+<p>Projelerin çalıştığı portlar <b>Ports.txt</b> dosyasının içerisinde kayıt altında tutuluyor.</p>
 
-Projeyi Çalıştırmak için;
-1-) Proje ana dizinindeyken "docker-compose up" diyerek bütün docker image'larını yüklüyoruz.
+<b>Projeyi Çalıştırmak için;</b><br>
+<ol>
+  <li>Proje ana dizinindeyken <b>"docker-compose up"</b> diyerek bütün docker image'larını yüklüyoruz.</li>
+</ol>

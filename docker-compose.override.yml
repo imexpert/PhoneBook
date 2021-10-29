@@ -17,3 +17,9 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+  book.api:
+    container_name: book.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - RabbitMQUrl: rabbitmq
+      - ConnectionStrings:PostgreSql=User ID=admin; Password=Password12*; Server=bookdb; Port=5432;Database=bookdb;Integrated Security=true;Pooling=true

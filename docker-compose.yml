@@ -4,5 +4,10 @@ services:
     image: postgres
   rabbitmq:
     image: rabbitmq:3.9.8-management
+  book.api:
+    image: book_api_image
+    build:
+      context: .
+      dockerfile: Libraries/Book/PhoneBook.Libraries.Book.Api/Dockerfile
 volumes:
   bookdb_volume:

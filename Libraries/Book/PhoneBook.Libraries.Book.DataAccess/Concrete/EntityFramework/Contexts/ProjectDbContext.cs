@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PhoneBook.Libraries.Book.DataAccess.Concrete.EntityFramework.Contexts
@@ -45,6 +46,30 @@ namespace PhoneBook.Libraries.Book.DataAccess.Concrete.EntityFramework.Contexts
                 base.OnConfiguring(optionsBuilder.UseNpgsql(Configuration.GetConnectionString("PostgreSql"))
                     .EnableSensitiveDataLogging());
             }
+        }
+
+        public override Task<int> SaveChangesAsync(
+            bool acceptAllChangesOnSuccess, 
+            CancellationToken cancellationToken = default)
+        {
+            var entries = ChangeTracker.Entries()
+                .Where(e => e.State == EntityState.Added ||
+                e.State == EntityState.Modified);
+
+            var today = DateTime.Now;
+
+            foreach (var entry in entries)
+            {
+                if (entry.State == EntityState.Added)
+                {
+                    if (entry.Properties.Any(s => s.Metadata.Name == "Id"))
+                    {
+                        entry.Property("Id").CurrentValue = Guid.NewGuid();
+                    }
+                }
+            }
+
+            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
     }
 }

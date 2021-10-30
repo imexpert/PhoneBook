@@ -9,6 +9,8 @@ using PhoneBook.Core.Extensions;
 using PhoneBook.Core.Utilities.IoC;
 using PhoneBook.Core.Utilities.MessageBrokers.RabbitMq;
 using PhoneBook.Libraries.Book.Business.DependencyResolvers;
+using PhoneBook.Libraries.Book.DataAccess.Abstract;
+using PhoneBook.Libraries.Book.DataAccess.Concrete.EntityFramework;
 using PhoneBook.Libraries.Book.DataAccess.Concrete.EntityFramework.Contexts;
 using System;
 using System.Collections.Generic;
@@ -42,6 +44,8 @@ namespace PhoneBook.Libraries.Book.Business
 
             services.AddTransient<IMessageBrokerHelper, MqQueueHelper>();
             services.AddTransient<IMessageConsumer, MqConsumerHelper>();
+
+            services.AddTransient<IPersonRepository, PersonRepository>();
 
             services.AddAutoMapper(typeof(ConfigurationManager));
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());

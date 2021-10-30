@@ -14,4 +14,8 @@
     <ProjectReference Include="..\PhoneBook.Libraries.Book.DataAccess\PhoneBook.Libraries.Book.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Handlers\Persons\Queries\" />
+  </ItemGroup>
+
 </Project>

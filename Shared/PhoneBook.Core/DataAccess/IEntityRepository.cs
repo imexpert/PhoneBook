@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PhoneBook.Core.DataAccess
@@ -16,7 +17,7 @@ namespace PhoneBook.Core.DataAccess
         void Delete(T entity);
         Task<IEnumerable<T>> GetListAsync(Expression<Func<T, bool>> expression = null);
         Task<T> GetAsync(Expression<Func<T, bool>> expression);
-        Task<int> SaveChangesAsync();
+        Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken);
         IQueryable<T> Query();
     }
 }

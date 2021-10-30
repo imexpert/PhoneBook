@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PhoneBook.Core.DataAccess.Postgres
@@ -48,9 +49,9 @@ namespace PhoneBook.Core.DataAccess.Postgres
             return Context.Set<TEntity>();
         }
 
-        public Task<int> SaveChangesAsync()
+        public Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken)
         {
-            return Context.SaveChangesAsync();
+            return Context.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
 
         public TEntity Update(TEntity entity)

@@ -1,7 +1,9 @@
-﻿namespace PhoneBook.Core.Entities
+﻿using System;
+
+namespace PhoneBook.Core.Entities
 {
     public class BaseEntity : IEntity
     {
-        public virtual int Id { get; set; }
+        public virtual Guid Id { get; set; }
     }
 }

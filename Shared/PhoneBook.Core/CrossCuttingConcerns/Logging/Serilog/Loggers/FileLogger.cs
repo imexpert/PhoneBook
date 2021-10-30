@@ -9,9 +9,9 @@ using Serilog;
 
 namespace PhoneBook.Core.CrossCuttingConcerns.Logging.Serilog.Loggers
 {
-    public class FileLogger : LoggerServiceBase
+    public class FileLogger2 : LoggerServiceBase
     {
-        public FileLogger()
+        public FileLogger2()
         {
             var configuration = ServiceTool.ServiceProvider.GetService<IConfiguration>();
 

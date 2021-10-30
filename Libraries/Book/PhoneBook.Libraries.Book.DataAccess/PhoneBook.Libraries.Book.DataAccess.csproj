@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Concrete\Configurations\" />
     <Folder Include="Migrations\" />
     <Folder Include="Abstract\" />
   </ItemGroup>
@@ -17,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\PhoneBook.Core\PhoneBook.Core.csproj" />
+    <ProjectReference Include="..\PhoneBook.Libraries.Book.Entities\PhoneBook.Libraries.Book.Entities.csproj" />
   </ItemGroup>
 
 </Project>

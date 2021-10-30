@@ -5,8 +5,6 @@ using PhoneBook.Core.CrossCuttingConcerns.Caching;
 using PhoneBook.Core.CrossCuttingConcerns.Caching.Microsoft;
 using PhoneBook.Core.Utilities.IoC;
 using PhoneBook.Core.Utilities.Messages;
-using PhoneBook.Core.Utilities.Uri;
-using PhoneBook.Core.Utilities.URI;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -24,13 +22,6 @@ namespace PhoneBook.Core.DependencyResolvers
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<Stopwatch>();
             services.AddMediatR(Assembly.GetExecutingAssembly());
-            services.AddSingleton<IUriService>(o =>
-            {
-                var accessor = o.GetRequiredService<IHttpContextAccessor>();
-                var request = accessor.HttpContext?.Request;
-                var uri = string.Concat(request?.Scheme, "://", request?.Host.ToUriComponent(), request?.PathBase);
-                return new UriManager(uri);
-            });
 
             services.AddSwaggerGen(c =>
             {

@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.Extensions.Configuration;
+using PhoneBook.Libraries.Book.Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +13,8 @@ namespace PhoneBook.Libraries.Book.DataAccess.Concrete.EntityFramework.Contexts
 {
     public class ProjectDbContext : DbContext
     {
+        public static readonly string DEFAULT_SCHEMA = "dbo";
+
         protected IConfiguration Configuration { get; }
 
         /// <summary>
@@ -29,6 +33,10 @@ namespace PhoneBook.Libraries.Book.DataAccess.Concrete.EntityFramework.Contexts
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
+
+        public DbSet<Log> Logs { get; set; }
+        public DbSet<Person> Persons { get; set; }
+        public DbSet<PersonContact> PersonContacts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

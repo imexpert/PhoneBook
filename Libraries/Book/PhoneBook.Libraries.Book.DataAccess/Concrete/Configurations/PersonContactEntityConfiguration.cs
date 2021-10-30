@@ -2,13 +2,6 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PhoneBook.Libraries.Book.DataAccess.Concrete.EntityFramework.Contexts;
 using PhoneBook.Libraries.Book.Entities.Concrete;
-using PhoneBook.Libraries.Book.Entities.Enumerations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace PhoneBook.Libraries.Book.DataAccess.Concrete.Configurations
 {
     public class PersonContactEntityConfiguration : BaseConfiguration<PersonContact>
@@ -17,20 +10,9 @@ namespace PhoneBook.Libraries.Book.DataAccess.Concrete.Configurations
         {
             builder.ToTable("PersonContacts", ProjectDbContext.DEFAULT_SCHEMA);
 
-            builder.Property(x => x.ContactTypeId).IsRequired();
-            builder.Property(x => x.Content).HasMaxLength(100).IsRequired();
-
-            builder
-                .HasOne<ContactTypes>()
-                .WithMany()
-                .IsRequired()
-                .HasForeignKey("ContactTypeId");
-
-            builder
-                .HasOne<Person>()
-                .WithMany()
-                .IsRequired()
-                .HasForeignKey("PersonId");
+            builder.Property(x => x.PhoneNumber).HasMaxLength(15).IsRequired();
+            builder.Property(x => x.Email).HasMaxLength(50).IsRequired();
+            builder.Property(x => x.Location).HasMaxLength(50).IsRequired();
 
             base.Configure(builder);
         }

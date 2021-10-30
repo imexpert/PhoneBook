@@ -1,5 +1,4 @@
 ﻿using PhoneBook.Core.Entities;
-using PhoneBook.Libraries.Book.Entities.Enumerations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +10,8 @@ namespace PhoneBook.Libraries.Book.Entities.Concrete
     public class PersonContact : BaseEntity
     {
         public Guid PersonId { get; set; }
-        public int ContactTypeId { get; set; }
-        public string Content { get; set; }
-        public virtual Person Person { get; set; }
-        public virtual ContactTypes ContactType { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
+        public string Location { get; set; }
     }
 }

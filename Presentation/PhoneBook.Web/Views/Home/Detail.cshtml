@@ -1,0 +1,61 @@
+﻿@using PhoneBook.Core.Utilities.Results
+@using PhoneBook.Libraries.Book.Entities.ComplexTypes
+
+@model ResponseMessage<PersonDetailModel>
+
+@if (Model.IsSuccess)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Ad</span>
+                <input type="text" class="form-control" value="@Model.Data.Person.Firstname" readonly="readonly" aria-describedby="basic-addon1">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Soyad</span>
+                <input type="text" class="form-control" value="@Model.Data.Person.Lastname" readonly="readonly" aria-describedby="basic-addon1">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Firma</span>
+                <input type="text" class="form-control" value="@Model.Data.Person.Company" readonly="readonly" aria-describedby="basic-addon1">
+            </div>
+        </div>
+        <div class="col-md-12 text-end">
+            <a class="btn btn-sm btn-success" asp-action="CreateContact" asp-controller="Home" asp-route-id="@Model.Data.Person.Id">Yeni Ekle</a>
+        </div>
+        <div class="col-md-12 mt-2">
+            <table class="table table-bordered table-sm">
+                <caption>Kişi Listesi</caption>
+                <thead>
+                    <tr>
+                        <th>Telefon Numarası</th>
+                        <th>E-Mail</th>
+                        <th>Konum</th>
+                        <th class="text-center">#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Data.PersonContacts)
+                    {
+                        <tr>
+                            <td class="w-25">@item.PhoneNumber</td>
+                            <td class="w-25">@item.Email</td>
+                            <td class="w-25">@item.Location</td>
+                            <td class="text-center">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <a asp-controller="Home" asp-action="Detail" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Kişi Detay</a>
+                                    <a class="btn btn-sm btn-primary">Düzenle</a>
+                                    <a class="btn btn-sm btn-primary">Sil</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

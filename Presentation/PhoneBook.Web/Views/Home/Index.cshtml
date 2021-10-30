@@ -1,23 +1,40 @@
-﻿@model List<PhoneBook.Libraries.Book.Entities.Concrete.Person>
+﻿@using PhoneBook.Core.Utilities.Results
+@using PhoneBook.Libraries.Book.Entities.Concrete
 
-    <table class="table table-sm">
-        <caption>List of users</caption>
-        <thead>
-            <tr>
-                <th>Ad</th>
-                <th>Soyad</th>
-                <th>Şirket</th>
-                <th>#</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+@model ResponseMessage<List<Person>>
+
+<div class="row">
+    <div class="col-md-10">
+        <table class="table table-bordered table-sm">
+            <caption>Kişi Listesi</caption>
+            <thead>
                 <tr>
-                    <td>@item.Firstname</td>
-                    <td>@item.Lastname</td>
-                    <td>@item.Company</td>
+                    <th>Ad</th>
+                    <th>Soyad</th>
+                    <th>Şirket</th>
+                    <th class="text-center">#</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @if (Model.IsSuccess)
+                {
+                    @foreach (var item in Model.Data)
+                    {
+                        <tr>
+                            <td class="w-25">@item.Firstname</td>
+                            <td class="w-25">@item.Lastname</td>
+                            <td class="w-25">@item.Company</td>
+                            <td class="text-center">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <a asp-controller="Home" asp-action="Detail" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Kişi Detay</a>
+                                    <a class="btn btn-sm btn-primary">Düzenle</a>
+                                    <a class="btn btn-sm btn-primary">Sil</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

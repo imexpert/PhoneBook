@@ -33,6 +33,7 @@ namespace PhoneBook.Web
             services.AddHttpContextAccessor();
             services.AddHttpClientServices(Configuration);
             services.AddControllersWithViews()
+                .AddRazorRuntimeCompilation()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<PersonCreateValidator>());
         }
 

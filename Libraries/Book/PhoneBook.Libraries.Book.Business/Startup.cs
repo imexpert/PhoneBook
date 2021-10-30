@@ -46,6 +46,7 @@ namespace PhoneBook.Libraries.Book.Business
             services.AddTransient<IMessageConsumer, MqConsumerHelper>();
 
             services.AddTransient<IPersonRepository, PersonRepository>();
+            services.AddTransient<IPersonContactRepository, PersonContactRepository>();
 
             services.AddAutoMapper(typeof(ConfigurationManager));
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());

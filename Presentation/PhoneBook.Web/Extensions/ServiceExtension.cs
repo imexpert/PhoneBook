@@ -20,6 +20,11 @@ namespace PhoneBook.Web.Extensions
             {
                 opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}/{serviceApiSettings.Book.Path}");
             });
+
+            services.AddHttpClient<IPersonContactService, PersonContactService>(opt =>
+            {
+                opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}/{serviceApiSettings.Book.Path}");
+            });
         }
     }
 }

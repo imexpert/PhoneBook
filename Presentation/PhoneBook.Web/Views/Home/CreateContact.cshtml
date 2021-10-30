@@ -1,0 +1,29 @@
+﻿@using PhoneBook.Libraries.Book.Entities.Concrete;
+
+@model PersonContact
+
+<form asp-action="CreateContact" asp-controller="Home" method="post">
+    <div class="row">
+        <input type="hidden" asp-for="PersonId"/>
+        <div class="col-md-12">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Telefon Numarası</span>
+                <input type="text" class="form-control" asp-for="PhoneNumber" aria-describedby="basic-addon1">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">E-Mail</span>
+                <input type="text" class="form-control" asp-for="Email"aria-describedby="basic-addon1">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Konum</span>
+                <input type="text" class="form-control" asp-for="Location"  aria-describedby="basic-addon1">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:70px">Kaydet</button>
+    </div>
+</form>

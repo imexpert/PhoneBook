@@ -14,4 +14,8 @@
     <ProjectReference Include="..\PhoneBook.Libraries.Book.Entities\PhoneBook.Libraries.Book.Entities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\Pg\" />
+  </ItemGroup>
+
 </Project>

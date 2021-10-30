@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PhoneBook.Libraries.Book.DataAccess.Concrete.EntityFramework.Contexts;
 using PhoneBook.Libraries.Book.Entities.Concrete;
+using PhoneBook.Libraries.Book.Entities.Enumerations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,8 +17,14 @@ namespace PhoneBook.Libraries.Book.DataAccess.Concrete.Configurations
         {
             builder.ToTable("PersonContacts", ProjectDbContext.DEFAULT_SCHEMA);
 
-            builder.Property(x => x.ContactType).IsRequired();
+            builder.Property(x => x.ContactTypeId).IsRequired();
             builder.Property(x => x.Content).HasMaxLength(100).IsRequired();
+
+            builder
+                .HasOne<ContactTypes>()
+                .WithMany()
+                .IsRequired()
+                .HasForeignKey("ContactTypeId");
 
             builder
                 .HasOne<Person>()

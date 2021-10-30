@@ -48,10 +48,7 @@ namespace PhoneBook.Libraries.Book.Api
                     builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             });
 
-            services.AddSwaggerGen(c =>
-            {
-                c.IncludeXmlComments(Path.ChangeExtension(typeof(Startup).Assembly.Location, ".xml"));
-            });
+            services.AddSwaggerGen();
 
             services.AddTransient<PostgreSqlLogger>();
 

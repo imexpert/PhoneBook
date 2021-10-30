@@ -37,7 +37,6 @@ namespace PhoneBook.Libraries.Book.Business.DependencyResolvers
         {
             var assembly = Assembly.GetExecutingAssembly();
 
-
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
                 .AsClosedTypesOf(typeof(IRequestHandler<,>));
 

@@ -1,0 +1,23 @@
+﻿@model List<PhoneBook.Libraries.Book.Entities.Concrete.Person>
+
+    <table class="table table-sm">
+        <caption>List of users</caption>
+        <thead>
+            <tr>
+                <th>Ad</th>
+                <th>Soyad</th>
+                <th>Şirket</th>
+                <th>#</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Firstname</td>
+                    <td>@item.Lastname</td>
+                    <td>@item.Company</td>
+                </tr>
+            }
+        </tbody>
+    </table>

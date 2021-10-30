@@ -12,6 +12,16 @@
   <li> Gateway olarak <b>Ocelot</b> kütüphanesi tercih edilmiştir.</li>
 </ol>
 
+<p><b>Proje Migration Ayarları;</b></p>
+<ol>
+  <li>Startup Projesi olarak <b>PhoneBook.Libraries.Book.Api</b> seçilir.</li>
+  <li>Package Manager Console açılır.</li>
+  <li>Package Manager Console içerisinden default proje olarak <b>PhoneBook.Libraries.Book.DataAccess</b> projesi seçilir.</li>
+  <li>Proje Envrinment değişkeni <b>$env:ASPNETCORE_ENVIRONMENT='Production'</b> komutu ile ayarlanır.</li>
+  <li><b>Add-Migration InitialCreate -Context ProjectDbContext -OutputDir Migrations/Pg</b> komut ile ilk migration oluşturulur.</li>
+  <li>Yapılan değişiklikler <b>Update-Database -context ProjectDbContext</b> komut ile database'e gönderilir.</li>
+</ol>
+
 <b>Projeyi Çalıştırmak için;</b><br>
 <ol>
   <li>Proje ana dizinindeyken <b>"docker-compose up"</b> diyerek bütün docker image'larını yüklüyoruz.</li>

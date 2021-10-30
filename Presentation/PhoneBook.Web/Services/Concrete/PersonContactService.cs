@@ -36,21 +36,33 @@ namespace PhoneBook.Web.Services.Concrete
                 // Get string data
                 string data = await response.Content.ReadAsStringAsync();
 
-                var group = JsonConvert.DeserializeObject<ResponseMessage<PersonContact>>(data);
-
-                if (group.IsSuccess)
-                {
-                    await AddAsync(group.Data);
-                }
+                var contact = JsonConvert.DeserializeObject<ResponseMessage<PersonContact>>(data);
 
                 // Deserialize the data
-                return group;
+                return contact;
             }
         }
 
-        public Task<ResponseMessage<bool>> DeleteAsync(Guid id)
+        public async Task<ResponseMessage<PersonContact>> DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            string json = JsonConvert.SerializeObject(id,
+                new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore
+                });
+
+            using (StringContent content = new StringContent(json, Encoding.UTF8, "application/json"))
+            {
+                var response = await _client.PutAsync("PersonContacts/Delete", content);
+
+                // Get string data
+                string data = await response.Content.ReadAsStringAsync();
+
+                var contact = JsonConvert.DeserializeObject<ResponseMessage<PersonContact>>(data);
+
+                // Deserialize the data
+                return contact;
+            }
         }
     }
 }

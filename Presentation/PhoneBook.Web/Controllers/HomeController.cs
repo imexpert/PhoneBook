@@ -39,7 +39,7 @@ namespace PhoneBook.Web.Controllers
             var contactResult = await _personContactService.AddAsync(contact);
             if (contactResult.IsSuccess)
             {
-                return RedirectToAction("Detail", "Home", contactResult.Data.PersonId);
+                return RedirectToAction("Detail", "Home", new { id = contactResult.Data.PersonId });
             }
 
             return View(contact);
@@ -48,6 +48,17 @@ namespace PhoneBook.Web.Controllers
         public async Task<IActionResult> Detail(Guid id)
         {
             return View(await _personService.GetPersonDetailAsync(id));
+        }
+        
+        public async Task<IActionResult> DeleteContact(Guid id)
+        {
+            var result = await _personContactService.DeleteAsync(id);
+            if (result.IsSuccess)
+            {
+                return RedirectToAction("Detail", "Home", new { id = result.Data.PersonId });
+            }
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -47,9 +47,7 @@
                             <td class="w-25">@item.Location</td>
                             <td class="text-center">
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <a asp-controller="Home" asp-action="Detail" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Kişi Detay</a>
-                                    <a class="btn btn-sm btn-primary">Düzenle</a>
-                                    <a class="btn btn-sm btn-primary">Sil</a>
+                                    <a class="btn btn-sm btn-primary" asp-controller="Home" asp-action="DeleteContact" asp-route-id="@item.Id">Sil</a>
                                 </div>
                             </td>
                         </tr>

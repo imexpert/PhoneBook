@@ -11,6 +11,6 @@ namespace PhoneBook.Web.Services.Abstract
     public interface IPersonContactService
     {
         Task<ResponseMessage<PersonContact>> AddAsync(PersonContact personContact);
-        Task<ResponseMessage<bool>> DeleteAsync(Guid id);
+        Task<ResponseMessage<PersonContact>> DeleteAsync(Guid id);
     }
 }

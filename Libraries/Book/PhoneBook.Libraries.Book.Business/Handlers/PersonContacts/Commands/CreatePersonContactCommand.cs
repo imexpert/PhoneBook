@@ -25,7 +25,6 @@ namespace PhoneBook.Libraries.Book.Business.Handlers.PersonContacts.Commands
                 _personContactRepository = personContactRepository;
             }
 
-            [LogAspect(typeof(PostgreSqlLogger))]
             public async Task<ResponseMessage<PersonContact>> Handle(CreatePersonContactCommand request, CancellationToken cancellationToken)
             {
                 _personContactRepository.Add(request.Model);

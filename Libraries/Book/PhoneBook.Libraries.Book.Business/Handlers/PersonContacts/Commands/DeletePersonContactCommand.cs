@@ -13,10 +13,10 @@ using System.Threading.Tasks;
 
 namespace PhoneBook.Libraries.Book.Business.Handlers.PersonContacts.Commands
 {
-    public class DeletePersonContactCommand : IRequest<ResponseMessage<bool>>
+    public class DeletePersonContactCommand : IRequest<ResponseMessage<PersonContact>>
     {
         public Guid Id { get; set; }
-        public class DeletePersonContactCommandHandler : IRequestHandler<DeletePersonContactCommand, ResponseMessage<bool>>
+        public class DeletePersonContactCommandHandler : IRequestHandler<DeletePersonContactCommand, ResponseMessage<PersonContact>>
         {
             IPersonContactRepository _personContactRepository;
 
@@ -26,18 +26,18 @@ namespace PhoneBook.Libraries.Book.Business.Handlers.PersonContacts.Commands
             }
 
             [LogAspect(typeof(PostgreSqlLogger))]
-            public async Task<ResponseMessage<bool>> Handle(DeletePersonContactCommand request, CancellationToken cancellationToken)
+            public async Task<ResponseMessage<PersonContact>> Handle(DeletePersonContactCommand request, CancellationToken cancellationToken)
             {
-                var person = await _personContactRepository.GetAsync(s => s.Id == request.Id);
+                var personContact = await _personContactRepository.GetAsync(s => s.Id == request.Id);
 
-                if (person == null)
+                if (personContact == null)
                 {
-                    return ResponseMessage<bool>.NoDataFound();
+                    return ResponseMessage<PersonContact>.NoDataFound();
                 }
 
-                _personContactRepository.Delete(person);
+                _personContactRepository.Delete(personContact);
                 await _personContactRepository.SaveChangesAsync(true, cancellationToken);
-                return ResponseMessage<bool>.Success(200);
+                return ResponseMessage<PersonContact>.Success(personContact, 200);
             }
         }
     }

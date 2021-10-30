@@ -4,4 +4,14 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.3.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\PhoneBook.Core\PhoneBook.Core.csproj" />
+    <ProjectReference Include="..\PhoneBook.Libraries.Book.DataAccess\PhoneBook.Libraries.Book.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>

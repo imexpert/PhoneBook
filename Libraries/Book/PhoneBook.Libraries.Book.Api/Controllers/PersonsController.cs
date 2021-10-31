@@ -53,5 +53,20 @@ namespace PhoneBook.Libraries.Book.Api.Controllers
 
             return ReturnResult(await Mediator.Send(command));
         }
+
+        /// <summary>
+        /// Add PersonContact.
+        /// </summary>
+        /// <param name="createPersonContact"></param>
+        /// <returns></returns>
+        [Consumes("application/json")]
+        [Produces("application/json", "text/plain")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseMessage<Person>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ResponseMessage<Person>))]
+        [HttpPut]
+        public async Task<IActionResult> Delete([FromBody] Guid id)
+        {
+            return ReturnResult(await Mediator.Send(new DeletePersonCommand() { Id = id }));
+        }
     }
 }

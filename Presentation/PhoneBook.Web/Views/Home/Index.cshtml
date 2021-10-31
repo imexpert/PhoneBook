@@ -4,7 +4,17 @@
 @model ResponseMessage<List<Person>>
 
 <div class="row">
-    <div class="col-md-10">
+    @if (@TempData["Message"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["Message"]
+        </div>
+    }
+
+    <div class="col-md-12 text-end">
+        <a class="btn btn-sm btn-success" asp-action="CreatePerson" asp-controller="Home">Yeni Ekle</a>
+    </div>
+    <div class="col-md-12 mt-2">
         <table class="table table-bordered table-sm">
             <caption>Kişi Listesi</caption>
             <thead>
@@ -27,8 +37,7 @@
                             <td class="text-center">
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                     <a asp-controller="Home" asp-action="Detail" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Kişi Detay</a>
-                                    <a class="btn btn-sm btn-primary">Düzenle</a>
-                                    <a class="btn btn-sm btn-primary">Sil</a>
+                                    <a class="btn btn-sm btn-primary" asp-controller="Home" asp-action="DeletePerson" asp-route-id="@item.Id">Sil</a>
                                 </div>
                             </td>
                         </tr>

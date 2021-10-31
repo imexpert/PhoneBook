@@ -13,31 +13,42 @@ using System.Threading.Tasks;
 
 namespace PhoneBook.Libraries.Book.Business.Handlers.Persons.Commands
 {
-    public class DeletePersonCommand : IRequest<ResponseMessage<bool>>
+    public class DeletePersonCommand : IRequest<ResponseMessage<Person>>
     {
         public Guid Id { get; set; }
-        public class DeletePersonCommandHandler : IRequestHandler<DeletePersonCommand, ResponseMessage<bool>>
+        public class DeletePersonCommandHandler : IRequestHandler<DeletePersonCommand, ResponseMessage<Person>>
         {
             IPersonRepository _personRepository;
+            IPersonContactRepository _personContactRepository;
 
-            public DeletePersonCommandHandler(IPersonRepository personRepository)
+            public DeletePersonCommandHandler(
+                IPersonRepository personRepository,
+                IPersonContactRepository personContactRepository)
             {
                 _personRepository = personRepository;
+                _personContactRepository = personContactRepository;
             }
 
             [LogAspect(typeof(PostgreSqlLogger))]
-            public async Task<ResponseMessage<bool>> Handle(DeletePersonCommand request, CancellationToken cancellationToken)
+            public async Task<ResponseMessage<Person>> Handle(DeletePersonCommand request, CancellationToken cancellationToken)
             {
                 var person = await _personRepository.GetAsync(s => s.Id == request.Id);
 
                 if (person == null)
                 {
-                    return ResponseMessage<bool>.NoDataFound();
+                    return ResponseMessage<Person>.NoDataFound();
+                }
+
+                var contactList = await _personContactRepository.GetListAsync(s => s.PersonId == person.Id);
+
+                if (contactList.Count() > 0)
+                {
+                    return ResponseMessage<Person>.Fail("Kişi detay bilgisi varken silme yapılamaz.");
                 }
 
                 _personRepository.Delete(person);
                 await _personRepository.SaveChangesAsync(true, cancellationToken);
-                return ResponseMessage<bool>.Success(200);
+                return ResponseMessage<Person>.Success(200);
             }
         }
     }

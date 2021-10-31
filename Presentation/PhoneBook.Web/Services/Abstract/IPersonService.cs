@@ -10,11 +10,9 @@ namespace PhoneBook.Web.Services.Abstract
 {
     public interface IPersonService
     {
-        Task<ResponseMessage<Person>> GetAsync(Guid id);
         Task<ResponseMessage<PersonDetailModel>> GetPersonDetailAsync(Guid id);
         Task<ResponseMessage<List<Person>>> GetListAsync();
         Task<ResponseMessage<Person>> AddAsync(Person person);
-        Task<ResponseMessage<Person>> UpdateAsync(Person person);
-        Task<ResponseMessage<bool>> DeleteAsync(Guid id);
+        Task<ResponseMessage<Person>> DeleteAsync(Guid id);
     }
 }

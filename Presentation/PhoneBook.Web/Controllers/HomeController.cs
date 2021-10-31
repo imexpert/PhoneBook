@@ -26,6 +26,41 @@ namespace PhoneBook.Web.Controllers
             return View(await _personService.GetListAsync());
         }
 
+        public async Task<IActionResult> Detail(Guid id)
+        {
+            return View(await _personService.GetPersonDetailAsync(id));
+        }
+
+        public IActionResult CreatePerson()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreatePerson(Person person)
+        {
+            var contactResult = await _personService.AddAsync(person);
+            if (contactResult.IsSuccess)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<IActionResult> DeletePerson(Guid id)
+        {
+            var result = await _personService.DeleteAsync(id);
+            if (result.IsSuccess)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            TempData["Message"] = result.Message;
+
+            return RedirectToAction("Index", "Home");
+        }
+
         public IActionResult CreateContact(Guid id)
         {
             PersonContact contact = new();
@@ -45,11 +80,6 @@ namespace PhoneBook.Web.Controllers
             return View(contact);
         }
 
-        public async Task<IActionResult> Detail(Guid id)
-        {
-            return View(await _personService.GetPersonDetailAsync(id));
-        }
-        
         public async Task<IActionResult> DeleteContact(Guid id)
         {
             var result = await _personContactService.DeleteAsync(id);

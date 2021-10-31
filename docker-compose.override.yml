@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  bookdb:
+    container_name: bookdb
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - bookdb_volume:/var/lib/postgres/data
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=Password12*
+      - POSTGRES_DB=bookdb
+  rabbitmq:
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+  book.api:
+    container_name: book.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - RabbitMQUrl: rabbitmq
+      - ConnectionStrings:PostgreSql=User ID=admin; Password=Password12*; Server=bookdb; Port=5432;Database=bookdb;Integrated Security=true;Pooling=true

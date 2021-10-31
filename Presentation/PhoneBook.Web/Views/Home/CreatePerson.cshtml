@@ -1,0 +1,28 @@
+﻿@using PhoneBook.Libraries.Book.Entities.Concrete;
+
+@model Person
+
+<form asp-action="CreatePerson" asp-controller="Home" method="post">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Ad</span>
+                <input type="text" class="form-control" asp-for="Firstname" aria-describedby="basic-addon1">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Soyad</span>
+                <input type="text" class="form-control" asp-for="Lastname" aria-describedby="basic-addon1">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Firma</span>
+                <input type="text" class="form-control" asp-for="Company" aria-describedby="basic-addon1">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:70px">Kaydet</button>
+    </div>
+</form>
